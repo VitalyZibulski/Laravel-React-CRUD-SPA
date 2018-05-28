@@ -55655,6 +55655,28 @@ var App = function (_Component) {
                 );
             });
         }
+
+        //get all the tasks from backend
+
+    }, {
+        key: 'getTasks',
+        value: function getTasks() {
+            var _this3 = this;
+
+            axios.get('/tasks').then(function (response) {
+                return _this3.setState({
+                    tasks: [].concat(_toConsumableArray(response.data.tasks))
+                });
+            });
+        }
+
+        //lifecycle method
+
+    }, {
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            this.getTasks();
+        }
     }, {
         key: 'render',
         value: function render() {
