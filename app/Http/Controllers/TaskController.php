@@ -74,7 +74,11 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        //
+        $task = Task::findOrFail($id);
+
+        return response()->json([
+        	'task' => $task
+		]);
     }
 
     /**
@@ -84,9 +88,13 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TaskRequest $request, $id)
     {
-        //
+        $input = $request->all();
+        $task = Task::findOrFail($id);
+        $task->update($input);
+
+        return response()->json($task)->with('user')->find($task->id);
     }
 
     /**
